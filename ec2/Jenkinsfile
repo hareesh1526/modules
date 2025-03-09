@@ -10,7 +10,15 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/hareesh1526/modules.git'
-                sh 'cd ec2/'
+            }
+        }
+    stage('Read Jenkinsfile') {
+            steps {
+                script {
+                    def jenkinsFilePath = 'ec2/Jenkinsfile'
+                    def jenkinsScript = readFile(jenkinsFilePath)
+                    echo "Jenkinsfile content: \n${jenkinsScript}"
+                }
             }
         }
 
